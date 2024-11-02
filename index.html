@@ -17,23 +17,30 @@
         // Je détaille l'entiereté du calcul pour aider les gens qui souhaitent comprendre
         var alcoolParCycle = nbChaudrons * 3;
         // pour démarrer un nouveau cycle il suffit d'avoir les chaudrons de libre
-        var nombreCycleParHeure = Math.floor(60/(parseInt(duree)));
+        var nombreCycleParHeure = Math.floor(60/(duree));
         var alcoolParHeure = alcoolParCycle * nombreCycleParHeure;
         document.getElementById("Total").innerHTML = "En "+nbHeure+" heures vous obtiendrez "+(alcoolParHeure * nbHeure) * prix+" mysts.";
-        if (parseInt(dureeDist)!=0) {
+        if (dureeDist!=0 && dureeDist!=undefined) {
             // on part du principe que la durée de distillation n'est pas supérieur à la durée de cuisson
             document.getElementById("Brew").innerHTML = "Vous aurez besoin de "+nbChaudrons+" alambics.";
         }
-        if (parseInt(dureeVieux)!=0) {
+        else{
+            document.getElementById("Brew").innerHTML = "";
+        }
+        if (dureeVieux!=0) {
             if (duree < (dureeDist+dureeVieux)) {
                 // c'est compliqué 
                 var nbFoisN = Math.fround((dureeDist+dureeVieux)/duree)
                 var nbVieuxBarrel = Math.round(alcoolParCycle/27)*nbFoisN  
                 document.getElementById("Barrel").innerHTML = "Vous aurez besoin de "+nbVieuxBarrel+" grands barrils.";
                 }
-            else {    
+            else {
+                var nbVieuxBarrel = Math.round(alcoolParCycle/27)  
             document.getElementById("Barrel").innerHTML = "Vous aurez besoin de "+nbVieuxBarrel+" grands barrils.";
             }
+        }
+        else {
+            document.getElementById("Barrel").innerHTML = "";
         }
         }
     </script>
