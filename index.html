@@ -7,7 +7,6 @@
     <script>
         function calculerAlcool()
         { 
-        var form = document.forms["calculeForm"];
         var nbChaudrons = parseInt(document.getElementById("nbChaudrons").value);
         var prix = parseInt(document.getElementById("prix").value);
         var duree = parseInt(document.getElementById("duree").value);
@@ -15,12 +14,14 @@
         var dureeVieux  = parseInt(document.getElementById("dureeVieux").value);
         var nbHeure = parseInt(document.getElementById("nbHeure").value);
         var nbMinute = parseInt(document.getElementById("nbMinute").value);
+        var mystsPeche = parseInt(document.getElementById("mystsPeche").value); 
         // Je détaille l'entiereté du calcul pour aider les gens qui souhaitent comprendre
         var alcoolParCycle = nbChaudrons * 3;
         // pour démarrer un nouveau cycle il suffit d'avoir les chaudrons de libre
         var nombreCycleParMinutes = 1/duree;
         var alcoolParMinutes = alcoolParCycle * nombreCycleParMinutes;
-        document.getElementById("Total").innerHTML = "En "+nbHeure+" heures et "+nbMinute+" minutes"+" heures vous obtiendrez "+(alcoolParMinutes * (nbHeure*60+nbMinute)) * prix+" mysts.";
+        var prixRevient = (alcoolParMinutes * (nbHeure*60+nbMinute)) * prix
+        document.getElementById("Total").innerHTML = "En "+nbHeure+" heures et "+nbMinute+" minutes"+" heures vous obtiendrez "+prixRevient+" mysts.";
         if (dureeDist!=0 && dureeDist!=undefined) {
             // on part du principe que la durée de distillation n'est pas supérieur à la durée de cuisson
             document.getElementById("Brew").innerHTML = "Vous aurez besoin de "+nbChaudrons+" alambics.";
@@ -43,12 +44,36 @@
         else {
             document.getElementById("Barrel").innerHTML = "";
         }
+        var mystsPechePourDuree = (mystsPeche/15)*(nbHeure*60+nbMinute) ;// On calcule le nombre de mysts obtenu pour la durée donnée en pêchant
+        if (mystsPeche<prixRevient){
+            document.getElementById("Rentable").innerHTML = "La production et la vente de cette alcool est rentable comparé aux revenues générés par la pêche en cette durée !"
         }
+        else {
+            document.getElementById("Rentable").innerHTML = "La production et la vente de cette alcool n'est pas rentable comparé aux revenues générés par la pêche en cette durée !"    
+        }
+        }
+        
+    
+    function showPeche()
+    {
+        var checkshowPeche = document.getElementById("tpsPeche");
+        var labelMystsPeche = document.getElementById("labelmystsPeche");
+        var mystsPeche = document.getElementById("mystsPeche"); 
+        if (checkshowPeche.checked){
+            labelMystsPeche.hidden = false;
+            mystsPeche.type = "number";
+        }
+        else {
+            labelMystsPeche.hidden = true;
+            mystsPeche.type = "hidden";
+        }
+    }
     </script>
 </head>
 <body>
     <h1>Calculateur du prix de revient de l'alcool pour une durée donnée pour le serveur minecraft Badlands</h1>
     <p>Cette page internet permet de calculer le prix de revient d'un alcool pour une durée donnée. On part du principe que l'alcool est parfait (donc 5 étoiles et baril agé et/ou distillé)</p>
+    <p>Fait par tetram26 A.K.A "gaspardAlizand"</p>
     <form action = "" id="calculeForm">
         <label for = "nbChaudrons">Nombre de chaudrons :</label><br>
         <input id = "nbChaudrons" name = "nbChaudrons" type = "number" min = "1" max = "40" value = "1"><br>
@@ -64,11 +89,42 @@
         <input id = "nbHeure" name = "nbHeure" type = "number" value = "1" min = "0" max = "24">
         <label>h</label>
         <input id = "nbMinute" name = "nbMinute" type = "number" value = "0" min = "0" max = "59">
-        <label>m</label><br><br>
+        <label>m</label><br>
+        <input type="checkbox" id = "tpsPeche" onclick="showPeche()">
+        <label>Calculer la rentabilité comparé à la pêche?</label><br>
+        <label id ="labelmystsPeche" for="mystsPeche" hidden>Quantité de mysts obtenu après 15 minutes de pêche (Test effectué avec une canne à pêche de vote):</label><br>
+        <input type="hidden" id = "mystsPeche" value = "3025">
+        <br>
+        
+        <label>Ingrédients nécessaires : </label>
+        <table>
+            <tr>
+                <td>Nom de l'item</td>
+                <td>Quantité</td>
+            </tr>
+            <tr>
+                <td><input id ="item1" name = "item1" type ="text"></td>
+                <td><input id ="qteItem1" name = "qteItem1" type ="number" min = "0"></td>
+            </tr>
+            <tr>
+                <td><input id ="item2" name = "item2" type ="text"></td>
+                <td><input id ="qteItem2" name = "qteItem2" type ="number" min = "0"></td>
+            </tr>
+            <tr>
+                <td><input id ="item3" name = "item3" type ="text"></td>
+                <td><input id ="qteItem3" name = "qteItem3" type ="number" min = "0"></td>
+            </tr>
+            <tr>
+                <td><input id ="item3" name = "item3" type ="text"></td>
+                <td><input id ="qteItem3" name = "qteItem3" type ="number" min = "0"></td>
+            </tr> 
+        </table><br>
+        
         <input type = "button" value = "Calculer" onclick="calculerAlcool()">
     </form>
     <p id = "Brew"></p>
     <p id = "Barrel"></p>
     <p id = "Total"></p>
+    <p id = "Rentable"></p>
 </body>
 </html>
