@@ -76,57 +76,77 @@
     <h1>Calculateur du prix de revient de l'alcool pour une durée donnée pour le serveur minecraft Badlands</h1>
     <p>Cette page internet permet de calculer le prix de revient d'un alcool pour une durée donnée. On part du principe que l'alcool est parfait (donc 5 étoiles et baril agé et/ou distillé)</p>
     <p>Fait par tetram26 A.K.A "gaspardAlizand"</p>
-    <form action = "" id="calculeForm">
-        <label for = "nbChaudrons">Nombre de chaudrons :</label><br>
-        <input id = "nbChaudrons" name = "nbChaudrons" type = "number" min = "1" max = "40" value = "1"><br>
-        <label for = "prix">prix de vente de l'alcool à l'unité :</label><br>
-        <input id = "prix" name = "prix" type = "number" value = "0"><br>
-        <label for = "duree">Durée nécessaire à la cuisson de l'alcool (en minutes): </label><br>
-        <input id = "duree" name = "duree" type = "number" value = "0"><br>
-        <label for = "dureeDist">Durée nécessaire à la distillation de l'alcool (en minutes): </label><br>
-        <input id ="dureeDist" name = "dureeDist" type = "number" value = "0"><br>
-        <label for = "dureeVieux">Durée nécessaire aux vieillissement de l'alcool (en minutes): </label><br>
-        <input id ="dureeVieux" name = "dureeVieux" type = "number" value = "0"><br>
-        <label>Durée :</label><br>
-        <input id = "nbHeure" name = "nbHeure" type = "number" value = "1" min = "0" max = "24">
-        <label>h</label>
-        <input id = "nbMinute" name = "nbMinute" type = "number" value = "0" min = "0" max = "59">
-        <label>m</label><br>
-        <input type="checkbox" id = "tpsPeche" onclick="showPeche()">
-        <label>Calculer la rentabilité comparé à la pêche?</label><br>
-        <label id ="labelmystsPeche" for="mystsPeche" hidden>Quantité de mysts obtenu après 15 minutes de pêche (Test effectué avec une canne à pêche de vote):</label><br>
-        <input type="hidden" id = "mystsPeche" value = "3025">
-        <br>
-        
-        <label>Ingrédients nécessaires : </label>
-        <table>
-            <tr>
-                <td>Nom de l'item</td>
-                <td>Quantité</td>
-            </tr>
-            <tr>
-                <td><input id ="item1" name = "item1" type ="text"></td>
-                <td><input id ="qteItem1" name = "qteItem1" type ="number" min = "0"></td>
-            </tr>
-            <tr>
-                <td><input id ="item2" name = "item2" type ="text"></td>
-                <td><input id ="qteItem2" name = "qteItem2" type ="number" min = "0"></td>
-            </tr>
-            <tr>
-                <td><input id ="item3" name = "item3" type ="text"></td>
-                <td><input id ="qteItem3" name = "qteItem3" type ="number" min = "0"></td>
-            </tr>
-            <tr>
-                <td><input id ="item3" name = "item3" type ="text"></td>
-                <td><input id ="qteItem3" name = "qteItem3" type ="number" min = "0"></td>
-            </tr> 
-        </table><br>
-        
-        <input type = "button" value = "Calculer" onclick="calculerAlcool()">
-    </form>
+    <label for = "nbChaudrons">Nombre de chaudrons :</label><br>
+    <input id = "nbChaudrons" name = "nbChaudrons" type = "number" min = "1" max = "40" value = "1"><br>
+    <label for = "prix">prix de vente de l'alcool à l'unité :</label><br>
+    <input id = "prix" name = "prix" type = "number" value = "0"><br>
+    <label for = "duree">Durée nécessaire à la cuisson de l'alcool (en minutes): </label><br>
+    <input id = "duree" name = "duree" type = "number" value = "0"><br>
+    <label for = "dureeDist">Durée nécessaire à la distillation de l'alcool (en minutes): </label><br>
+    <input id ="dureeDist" name = "dureeDist" type = "number" value = "0"><br>
+    <label for = "dureeVieux">Durée nécessaire aux vieillissement de l'alcool (en minutes): </label><br>
+    <input id ="dureeVieux" name = "dureeVieux" type = "number" value = "0"><br>
+    <label>Durée :</label><br>
+    <input id = "nbHeure" name = "nbHeure" type = "number" value = "1" min = "0" max = "24">
+    <label>h</label>
+    <input id = "nbMinute" name = "nbMinute" type = "number" value = "0" min = "0" max = "59">
+    <label>m</label><br>
+    <input type="checkbox" id = "tpsPeche" onclick="showPeche()">
+    <label>Calculer la rentabilité comparé à la pêche?</label><br>
+    <label id ="labelmystsPeche" for="mystsPeche" hidden>Quantité de mysts obtenu après 15 minutes de pêche (Test effectué avec une canne à pêche de vote):</label><br>
+    <input type="hidden" id = "mystsPeche" value = "3025" >
+    <br>
+    
+    <label hidden>Ingrédients nécessaires : </label>
+    <table hidden>
+        <tr>
+            <td>Nom de l'item</td>
+            <td>Quantité</td>
+        </tr>
+        <tr>
+            <td><input id ="item1" name = "item1" type ="text"></td>
+            <td><input id ="qteItem1" name = "qteItem1" type ="number" min = "0"></td>
+        </tr>
+        <tr>
+            <td><input id ="item2" name = "item2" type ="text"></td>
+            <td><input id ="qteItem2" name = "qteItem2" type ="number" min = "0"></td>
+        </tr>
+        <tr>
+            <td><input id ="item3" name = "item3" type ="text"></td>
+            <td><input id ="qteItem3" name = "qteItem3" type ="number" min = "0"></td>
+        </tr>
+        <tr>
+            <td><input id ="item3" name = "item3" type ="text"></td>
+            <td><input id ="qteItem3" name = "qteItem3" type ="number" min = "0"></td>
+        </tr> 
+    </table><br>
+    
+    <input type = "button" value = "Calculer" onclick="calculerAlcool()">
     <p id = "Brew"></p>
     <p id = "Barrel"></p>
     <p id = "Total"></p>
     <p id = "Rentable"></p>
+    <table hidden>
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr hidden>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr hidden>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr hidden>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr hidden>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
 </body>
 </html>
