@@ -15,13 +15,14 @@
         var nbHeure = parseInt(document.getElementById("nbHeure").value);
         var nbMinute = parseInt(document.getElementById("nbMinute").value);
         var mystsPeche = parseInt(document.getElementById("mystsPeche").value); 
+         
         // Je détaille l'entiereté du calcul pour aider les gens qui souhaitent comprendre
         var alcoolParCycle = nbChaudrons * 3;
         // pour démarrer un nouveau cycle il suffit d'avoir les chaudrons de libre
         var nombreCycleParMinutes = 1/duree;
         var alcoolParMinutes = alcoolParCycle * nombreCycleParMinutes;
         var prixRevient = (alcoolParMinutes * (nbHeure*60+nbMinute)) * prix
-        document.getElementById("Total").innerHTML = "En "+nbHeure+" heures et "+nbMinute+" minutes"+" heures vous obtiendrez "+prixRevient+" mysts.";
+        document.getElementById("Total").innerHTML = "En "+nbHeure+" heures et "+nbMinute+" minutes"+" vous obtiendrez "+prixRevient+" mysts.";
         if (dureeDist!=0 && dureeDist!=undefined) {
             // on part du principe que la durée de distillation n'est pas supérieur à la durée de cuisson
             document.getElementById("Brew").innerHTML = "Vous aurez besoin de "+nbChaudrons+" alambics.";
@@ -44,22 +45,23 @@
         else {
             document.getElementById("Barrel").innerHTML = "";
         }
-        var mystsPechePourDuree = (mystsPeche/15)*(nbHeure*60+nbMinute) ;// On calcule le nombre de mysts obtenu pour la durée donnée en pêchant
-        if (mystsPeche<prixRevient){
-            document.getElementById("Rentable").innerHTML = "La production et la vente de cette alcool est rentable comparé aux revenues générés par la pêche en cette durée !"
+        if (document.getElementById("tpsPeche").checked){
+            var mystsPechePourDuree = (mystsPeche/15)*(nbHeure*60+nbMinute) ;// On calcule le nombre de mysts obtenu pour la durée donnée en pêchant
+            if (mystsPechePourDuree<prixRevient){
+                document.getElementById("Rentable").innerHTML = "La production et la vente de cette alcool est rentable comparé aux revenues générés par la pêche en cette durée !" 
+            }
+            else {
+                document.getElementById("Rentable").innerHTML = "La production et la vente de cette alcool n'est pas rentable comparé aux revenues générés par la pêche en cette durée !"    
+            }
         }
-        else {
-            document.getElementById("Rentable").innerHTML = "La production et la vente de cette alcool n'est pas rentable comparé aux revenues générés par la pêche en cette durée !"    
-        }
-        }
+    }
         
     
     function showPeche()
     {
-        var checkshowPeche = document.getElementById("tpsPeche");
         var labelMystsPeche = document.getElementById("labelmystsPeche");
         var mystsPeche = document.getElementById("mystsPeche"); 
-        if (checkshowPeche.checked){
+        if (document.getElementById("tpsPeche").checked){
             labelMystsPeche.hidden = false;
             mystsPeche.type = "number";
         }
