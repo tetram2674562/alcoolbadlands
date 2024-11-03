@@ -14,12 +14,13 @@
         var dureeDist  = parseInt(document.getElementById("dureeDist").value);
         var dureeVieux  = parseInt(document.getElementById("dureeVieux").value);
         var nbHeure = parseInt(document.getElementById("nbHeure").value);
+        var nbMinute = parseInt(document.getElementById("nbMinute").value);
         // Je détaille l'entiereté du calcul pour aider les gens qui souhaitent comprendre
         var alcoolParCycle = nbChaudrons * 3;
         // pour démarrer un nouveau cycle il suffit d'avoir les chaudrons de libre
-        var nombreCycleParHeure = Math.floor(60/(duree));
-        var alcoolParHeure = alcoolParCycle * nombreCycleParHeure;
-        document.getElementById("Total").innerHTML = "En "+nbHeure+" heures vous obtiendrez "+(alcoolParHeure * nbHeure) * prix+" mysts.";
+        var nombreCycleParMinutes = 1/duree;
+        var alcoolParMinutes = alcoolParCycle * nombreCycleParMinutes;
+        document.getElementById("Total").innerHTML = "En "+nbHeure+" heures et "+nbMinute+" minutes"+" heures vous obtiendrez "+(alcoolParMinutes * (nbHeure*60+nbMinute)) * prix+" mysts.";
         if (dureeDist!=0 && dureeDist!=undefined) {
             // on part du principe que la durée de distillation n'est pas supérieur à la durée de cuisson
             document.getElementById("Brew").innerHTML = "Vous aurez besoin de "+nbChaudrons+" alambics.";
@@ -46,21 +47,24 @@
     </script>
 </head>
 <body>
-    <h1>Calculateur du prix de revient de l'alcool par heure pour le serveur minecraft badlands</h1>
-    <p>Cette page internet permet de calculer le prix de revient d'un alcool par heure. On ne compte pas le temps de vieillissement dans les barrels et on part du principe que l'alcool est parfait (donc 5 étoiles et baril agé et/ou distillé)</p>
+    <h1>Calculateur du prix de revient de l'alcool pour une durée donnée pour le serveur minecraft Badlands</h1>
+    <p>Cette page internet permet de calculer le prix de revient d'un alcool pour une durée donnée. On part du principe que l'alcool est parfait (donc 5 étoiles et baril agé et/ou distillé)</p>
     <form action = "" id="calculeForm">
         <label for = "nbChaudrons">Nombre de chaudrons :</label><br>
         <input id = "nbChaudrons" name = "nbChaudrons" type = "number" min = "1" max = "40" value = "1"><br>
         <label for = "prix">prix de vente de l'alcool à l'unité :</label><br>
-        <input id = "prix" name = "prix" type = "number"><br>
+        <input id = "prix" name = "prix" type = "number" value = "0"><br>
         <label for = "duree">Durée nécessaire à la cuisson de l'alcool (en minutes): </label><br>
-        <input id = "duree" name = "duree" type = "number"><br>
+        <input id = "duree" name = "duree" type = "number" value = "0"><br>
         <label for = "dureeDist">Durée nécessaire à la distillation de l'alcool (en minutes): </label><br>
-        <input id ="dureeDist" name = "dureeDist" type = "number"><br>
+        <input id ="dureeDist" name = "dureeDist" type = "number" value = "0"><br>
         <label for = "dureeVieux">Durée nécessaire aux vieillissement de l'alcool (en minutes): </label><br>
-        <input id ="dureeVieux" name = "dureeVieux" type = "number"><br>
-        <label for = "nbHeure">Nombre d'heures :</label><br>
-        <input id = "nbHeure" name = "nbHeure" type = "number" value = "1"><br><br>
+        <input id ="dureeVieux" name = "dureeVieux" type = "number" value = "0"><br>
+        <label>Durée :</label><br>
+        <input id = "nbHeure" name = "nbHeure" type = "number" value = "1" min = "0" max = "24">
+        <label>h</label>
+        <input id = "nbMinute" name = "nbMinute" type = "number" value = "0" min = "0" max = "59">
+        <label>m</label><br><br>
         <input type = "button" value = "Calculer" onclick="calculerAlcool()">
     </form>
     <p id = "Brew"></p>
